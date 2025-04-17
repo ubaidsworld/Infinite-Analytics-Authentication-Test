@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Graph for {{ symbol }}</h2>
+<canvas id="coinChart" width="400" height="200"></canvas>
+<script>
+    const ctx = document.getElementById('coinChart').getContext('2d');
+    const chartData = {
+        labels: {{ graph_data.labels | tojson }},
+        datasets: [{
+            label: '{{ symbol }} Price',
+            data: {{ graph_data.prices | tojson }},
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+    const coinChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+            scales: {
+                y: { beginAtZero: false }
+            }
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Profile</h2>
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+{% if user.bio %}
+<p><strong>Bio:</strong> {{ user.bio }}</p>
+{% endif %}
+{% if user.phone %}
+<p><strong>Phone:</strong> {{ user.phone }}</p>
+{% endif %}
+{% if user.image_url %}
+<img src="{{ user.image_url }}" alt="Profile Photo" width="150">
+{% endif %}
+<p><a href="/edit-profile">Edit Profile</a></p>
+{% endblock %}

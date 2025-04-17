@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mb-4">
+  <div class="card-body">
+    <h2 class="card-title">Coin Detail - {{ coin.symbol }}</h2>
+    <p class="card-text"><strong>Last Price:</strong> {{ coin.lastPrice }}</p>
+    <p class="card-text"><strong>Price Change:</strong> {{ coin.priceChange }} ({{ coin.priceChangePercent }}%)</p>
+    <p class="card-text"><strong>Trend:</strong> {{ coin.trend }}</p>
+  </div>
+</div>
+
+<h3>Price Graph</h3>
+<canvas id="coinChart" width="400" height="200"></canvas>
+<script>
+    const ctx = document.getElementById('coinChart').getContext('2d');
+    const chartData = {
+        labels: {{ graph_data.labels | tojson }},
+        datasets: [{
+            label: '{{ coin.symbol }} Price',
+            data: {{ graph_data.prices | tojson }},
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
+    };
+    const coinChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+            scales: {
+                y: { beginAtZero: false }
+            }
+        }
+    });
+</script>
+{% endblock %}

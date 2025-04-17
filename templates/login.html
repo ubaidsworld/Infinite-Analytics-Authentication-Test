@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow">
+      <div class="card-header bg-info text-white">
+        <h3 class="mb-0">Login</h3>
+      </div>
+      <div class="card-body">
+        {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        
+        <!-- Standard login form -->
+        <form method="post" action="/login">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <hr>
+
+        <!-- OAuth Login Buttons -->
+        <div class="text-center">
+          <!-- Google Login -->
+          <a href="/google" class="btn btn-danger w-100 mb-2">
+            <i class="fab fa-google"></i> Sign in with Google
+          </a>
+
+          <!-- Facebook Login -->
+          <a href="/facebook" class="btn btn-primary w-100">
+            <i class="fab fa-facebook"></i> Sign in with Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

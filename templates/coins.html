@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Coin Details</h2>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Last Price</th>
+            <th scope="col">Price Change (%)</th>
+            <th scope="col">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for coin in coins %}
+        <tr>
+            <td>{{ coin.symbol }}</td>
+            <td>{{ coin.lastPrice }}</td>
+            <td>{{ coin.priceChangePercent }}%</td>
+            <td>
+                <a href="/coin/{{ coin.symbol }}" class="btn btn-sm btn-primary">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

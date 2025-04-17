@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header bg-primary text-white">
+    <h2>Singapore Air Temperature</h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Reading Type:</strong> {{ weather["metadata"]["reading_type"] }}</p>
+    <p><strong>Unit:</strong> {{ weather["metadata"]["reading_unit"] }}</p>
+    {% if weather["items"] and weather["items"]|length > 0 %}
+      <p><strong>Timestamp:</strong> {{ weather["items"][0]["timestamp"] }}</p>
+    {% endif %}
+    <table class="table table-striped mt-4">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Station ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Location (Lat, Lon)</th>
+          <th scope="col">Temperature ({{ weather["metadata"]["reading_unit"] }})</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for station in weather["metadata"]["stations"] %}
+        <tr>
+          <td>{{ station["id"] }}</td>
+          <td>{{ station["name"] }}</td>
+          <td>{{ station["location"]["latitude"] }}, {{ station["location"]["longitude"] }}</td>
+          <td>
+            {% if station["id"] in reading_dict %}
+              {{ reading_dict[station["id"]] }}
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
