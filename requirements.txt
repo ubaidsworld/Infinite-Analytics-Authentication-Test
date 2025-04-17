@@ -1,0 +1,10 @@
+fastapi[all]
+uvicorn
+sqlalchemy
+jinja2
+passlib[bcrypt]
+pyjwt
+requests
+python-multipart
+python-social-auth
+authlib
